@@ -1,0 +1,122 @@
+<aura:component controller="IntegrationManager" implements="force:appHostable" >
+    <aura:attribute name="sObjects" type="List"/>
+    <aura:attribute name="relatedsObjects" type="List"/>
+    <aura:attribute name="sObjectFields" type="List"/>
+    <aura:attribute name="filteredsObjectFields" type="List"/>
+    <aura:attribute name="endPoint" type="string"/>
+    <aura:attribute name="method" type="string"/>
+    <aura:attribute name="listViewName" type="string"/>
+    <aura:attribute name="parentMetaDataId" type="string"/>
+    <aura:attribute name="searchText" type="string"/>
+    
+    <aura:attribute name="sObjectAPI" type="string"/>
+    <aura:attribute name="sObjectLabel" type="string"/>
+    
+    <aura:attribute name="sortBy" type="String" default="AttributeValue"/>
+    <aura:attribute name="sortDirection" type="String" default="asc"/>
+    
+    <lightning:spinner aura:id="myspinner" alternativeText="Loading" size="medium" class="slds-hide"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>	
+    
+    <div class="container">
+        <div class="slds-align_absolute-center">
+            <lightning:button variant="brand" label="Save" title="Save Details" onclick="{!c.saveMetaDataDetails}" disabled="{!empty(v.endPoint)}"/>
+        </div>
+        
+        <fieldset class="clsFieldset">
+            <legend class="clsLegend">
+                <div class="slds-text-title_caps slds-text-color_success">{!$Label.c.Integration_Framework_Main_Section}</div>
+            </legend>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                    <lightning:select aura:id="sObjectList" label="{!$Label.c.Integration_Framework_Select_Main_sObject}" onchange="{!c.getRelatedsObjectList}">
+                        <option value="" text="--None--"/> 
+                        <aura:iteration items="{!v.sObjects}" var="sObj">
+                            <option value="{!sObj.value +'#'+ sObj.label}">{!sObj.label}</option>  
+                        </aura:iteration>
+                    </lightning:select>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                    <lightning:input value="{!v.endPoint}" label="{!$Label.c.Integration_Framework_EndPoint}" placeholder="{!$Label.c.Integration_Framework_EndPoint_Placeholder}" onblur="{!c.getExistingDetails}"/>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                    <lightning:input value="{!v.method}" label="{!$Label.c.Integration_Framework_Method}" placeholder="{!$Label.c.Integration_Framework_Method_Placeholder}"/>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                    <lightning:input value="{!v.listViewName}" label="{!$Label.c.Integration_Framework_ListViewName}" placeholder="{!$Label.c.Integration_Framework_ListViewName_Placeholder}"/>
+                </div>
+            </div>
+        </fieldset>
+        
+        <aura:if isTrue="{!not(empty(v.relatedsObjects))}">
+            <div class="slds-p-top_small">
+                <fieldset class="clsFieldset">
+                    <legend class="clsLegend">
+                        <div class="slds-text-title_caps slds-text-color_success">{!$Label.c.Integration_Framework_Mapping_Section}</div>
+                    </legend>
+                    
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                            <lightning:select aura:id="childsObjectList" label="{!$Label.c.Integration_Framework_Select_Mapping_sObject}" onchange="{!c.getsObjectFieldList}">
+                                <option value="" text="--None--"/> 
+                                <aura:iteration items="{!v.relatedsObjects}" var="sObj">
+                                    <option value="{!sObj.value}">{!sObj.label}</option>  
+                                </aura:iteration>
+                            </lightning:select>
+                        </div>
+                    </div>
+                    
+                    <aura:if isTrue="{!not(empty(v.sObjectFields))}">
+                        <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                            <lightning:input value="{!v.searchText}" label="{!$Label.c.Integration_Framework_Filter_Box}" placeholder="{!$Label.c.Integration_Framework_Filter_Box_Placeholder}" onchange="{!c.filterData}"/>
+                        </div>
+                        <div class="attributeContainer slds-p-top_small">
+                            <table class="slds-table slds-table_bordered table_sortable-cols slds-table_striped">
+                                <thead>
+                                    <tr class="slds-text-title_caps">
+                                        <th class="{!'slds-is-sortable' + if(v.sortBy == 'fieldAPI', ' slds-is-sorted slds-is-sorted_' + v.sortDirection)}" 
+                                            data-column-name="fieldAPI" 
+                                            onclick="{!c.handleSorting}" 
+                                            scope="col">
+                                            <a class="slds-th__action slds-text-link--reset" tabindex="0">
+                                                <span class="slds-assistive-text">Sort</span>
+                                                <span class="slds-truncate" title="fieldAPI">Field API</span>
+                                                <lightning:icon iconName="utility:arrowup" size="x-small" class="slds-icon slds-is-sortable__icon" />
+                                            </a>
+                                        </th>
+                                        <th class="{!'slds-is-sortable' + if(v.sortBy == 'attributeValue', ' slds-is-sorted slds-is-sorted_' + v.sortDirection)}" 
+                                            data-column-name="attributeValue" 
+                                            onclick="{!c.handleSorting}" 
+                                            scope="col">
+                                            <a class="slds-th__action slds-text-link--reset" tabindex="0">
+                                                <span class="slds-assistive-text">Sort</span>
+                                                <span class="slds-truncate" title="attributeValue">External Attribute</span>
+                                                <lightning:icon iconName="utility:arrowup" size="x-small" class="slds-icon slds-is-sortable__icon" />
+                                            </a>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{!v.filteredsObjectFields}" var="item">
+                                        <tr>
+                                            <td>
+                                                <lightning:input disabled="true" value="{!item.fieldAPI}" label="hidden" variant="label-hidden"/>
+                                            </td>
+                                            <td>
+                                                <lightning:input value="{!item.attributeValue}" label="hidden" variant="label-hidden"/>
+                                            </td>
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                            </table>
+                        </div>
+                    </aura:if>
+                </fieldset>
+                <div class="slds-align_absolute-center slds-p-top_small">
+                    <lightning:button variant="brand" label="Save" title="Save Details" onclick="{!c.saveMetaDataDetails}" disabled="{!empty(v.endPoint)}"/>
+                </div>
+            </div>
+        </aura:if>
+    </div>
+</aura:component>
