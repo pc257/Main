@@ -1,0 +1,33 @@
+<template>
+	<div class="slds-grid slds-wrap">
+		<div class="slds-size_9-of-12">
+			<div class="slds-grid slds-wrap">
+				<div class="slds-size_2-of-12">
+					<lightning-input type="date" name={datelabel} label={datelabel} value={dateselected} onchange={dateselectedChange}></lightning-input>
+				</div>
+				<div class="slds-size_2-of-12 slds-p-left_medium">
+					<lightning-combobox name={timelabel} label={timelabel} value={selectedTime} placeholder="--Select--" options={timeOptions} onchange={handleTimeChange}> </lightning-combobox>
+				</div>
+				<div class="slds-size_3-of-12 slds-p-left_medium">
+					<c-multi-pick-list label="Sponsor(s):" options={msOptions} selectedoption={_mOptions} onitemselected={handleOnItemSelected}></c-multi-pick-list>
+				</div>
+				<div class="slds-size_2-of-12 slds-p-left_xx-large">
+					<template if:true={othersponsor}>
+						<lightning-input type="text" name="other sponser" label="Other Sponsor:" value={othersponsorval} onchange={othersponsorChange}></lightning-input>
+					</template>
+				</div>
+				<div class="slds-size_3-of-12 slds-p-left_medium slds-p-top_large">
+					<template if:true={showCheckbox}>
+						<lightning-input type="checkbox" name="Copy Meeting Logictics 1:" label="Copy Meeting Logictics 1:" onchange={copyMeetingChange}></lightning-input>
+					</template>
+				</div>
+			</div>
+		</div>
+		<div class="slds-float--right slds-size_3-of-12 slds-p-left_medium slds-p-top_large">
+			<lightning-button variant="brand" label="Complete Meeting Logistics" title="Submit" onclick={openModal}></lightning-button>
+		</div>
+	</div>
+	<template if:true={isModalOpen}>
+		<c-meeting-modal-popup is-modal-open={isModalOpen} finalobjlist={finalobjlist} gpoaccessdates={gpoaccessdatesObj} meetingwrapper={meetingwrapper} compno={compno} ischecked={ischecked} onclosepopup={handleProgressValueChange}></c-meeting-modal-popup>
+	</template>
+</template>

@@ -1,0 +1,18 @@
+.rectangle {	
+    height: 25px;	
+    width: 110px;	
+    border-radius: 23px;
+    margin-top: 40px;
+    margin-left: 25px;
+}
+.link-4 {	
+    height: 13px;	
+    width: 90px;	
+    font-family: "Work Sans";	
+    font-size: 11px;	
+    font-weight: 600;	
+    letter-spacing: 0.71px;	
+    line-height: 23px;	
+    text-align: center;
+    margin-left: 10px;
+}

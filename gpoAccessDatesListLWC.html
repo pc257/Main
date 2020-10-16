@@ -1,0 +1,53 @@
+<template>
+	<div class="spinner">
+		<template if:true={isLoading}>
+			<lightning-spinner alternative-text="Loading" variant="brand" size="large"> </lightning-spinner>
+		</template>
+	</div>
+	<template if:false={isHomePage}>
+		<div class="slds-box"> <img src={ABCLogo}> </div>
+		<template if:false={isSubmitted}>
+			<div class="slds-text-heading_medium slds-text-title_bold slds-m-left_large slds-m-top_medium"> Roundtable Dates</div>
+			<div class="slds-m-left_large"> Please notify GPO immediately at <u>IPPs@amerisourcebergen.com</u> if a conflict should arise with one of your dates. Please choose 1 available date, time and pharma sponsor request per calendar quarter. Please refer to the available sponsor list provided and we will do our best to accommodate those requests.
+				<div class="slds-m-top_medium">** Please note, a new date and time must be provided with any cancellation request that is received within 1 week of your program date.</div>
+				<template if:true={isError}>
+					<div class="slds-m-vertical_medium">
+						<div class="slds-text-color_error slds-text-heading_medium slds-text-title_bold"> {showError}</div>
+					</div>
+				</template>
+				<div class="slds-text-color_error slds-m-top_medium">(required)</div>
+				<div class="slds-m-top_medium">
+					<c-gpo-access-dates-l-w-c datelabel='Date 1:' timelabel='Time 1:' compno='1' meetingwrapper={meeting1Wrapper} finalobjlist={finalobjlist} onpushdatatoparent={handleObjectChange} oncheckboxcheck={handlecheckbox}></c-gpo-access-dates-l-w-c>
+				</div>
+				<div class="slds-m-top_medium">
+					<c-gpo-access-dates-l-w-c datelabel='Date 2:' timelabel='Time 2:' compno='2' meetingwrapper={meeting1Wrapper} finalobjlist={finalobjlist} onpushdatatoparent={handleObjectChange} oncheckboxcheck={handlecheckbox}></c-gpo-access-dates-l-w-c>
+				</div>
+				<div class="slds-m-top_medium">
+					<c-gpo-access-dates-l-w-c datelabel='Date 3:' timelabel='Time 3:' compno='3' meetingwrapper={meeting1Wrapper} finalobjlist={finalobjlist} onpushdatatoparent={handleObjectChange} oncheckboxcheck={handlecheckbox}></c-gpo-access-dates-l-w-c>
+				</div>
+				<div class="slds-m-top_medium">
+					<c-gpo-access-dates-l-w-c datelabel='Date 4:' timelabel='Time 4:' compno='4' meetingwrapper={meeting1Wrapper} finalobjlist={finalobjlist} onpushdatatoparent={handleObjectChange} oncheckboxcheck={handlecheckbox}></c-gpo-access-dates-l-w-c>
+				</div>
+				<div class="slds-m-top_medium">LPP Plus Members: Please Submit your additional GPO LPP Roundtable Dates and times below.</div>
+				<div class="slds-m-top_medium">
+					<c-gpo-access-dates-l-w-c datelabel='Date 5:' timelabel='Time 5:' compno='5' meetingwrapper={meeting1Wrapper} finalobjlist={finalobjlist} onpushdatatoparent={handleObjectChange} oncheckboxcheck={handlecheckbox}></c-gpo-access-dates-l-w-c>
+				</div>
+				<div class="slds-m-top_medium">
+					<c-gpo-access-dates-l-w-c datelabel='Date 6:' timelabel='Time 6:' compno='6' meetingwrapper={meeting1Wrapper} finalobjlist={finalobjlist} onpushdatatoparent={handleObjectChange} oncheckboxcheck={handlecheckbox}></c-gpo-access-dates-l-w-c>
+				</div>
+			</div>
+			<div class="slds-m-top_medium slds-align_absolute-center slds-m-bottom_medium">
+				<lightning-button variant="brand" label="Submit" title="Submit" onclick={submitRecord}></lightning-button>
+				<div class="slds-m-left_large">
+					<lightning-button variant="brand" label="Cancel" title="Cancel" onclick={navigateToDHome}></lightning-button>
+				</div>
+			</div>
+		</template>
+	</template>
+	<template if:true={isHomePage}>
+		<c-gpo-home-site-page-l-w-c></c-gpo-home-site-page-l-w-c>
+	</template>
+	<template if:true={isSubmitted}>
+		<c-gpo-submission></c-gpo-submission>
+	</template>
+</template>

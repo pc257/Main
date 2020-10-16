@@ -1,0 +1,96 @@
+.heading{
+    text-align: center;
+    font-size: 57px;
+    color: #00539B;
+    font-family: 'RockwellLight';
+}
+.headcont{
+    text-align: center;
+    font-size: 23px;
+    color: #292A2B;
+    font-family: 'WorkSans';
+}
+.rectangle-copy-3 {	
+    height: 192px;	
+    width: 550px;
+    margin-left: 20px;
+    border: 1px solid #D0D6DB;	
+    border-radius: 2px;	
+    background-color: #FFFFFF;	
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.15);
+}
+.form-group-title {	
+    height: 39.6px;	width: 415.63px;	
+    color: #002B5C;	
+    font-size: 28px;	
+    font-weight: 300;	
+    line-height: 34px;
+    padding-left: 38px;
+    font-family: 'RockwellLight';
+}
+.form-group-descripti {	
+    height: 38px;	
+    width: 370.36px;	
+    color: #292A2B;	
+    font-family: "Work Sans";	
+    font-size: 16px;	
+    letter-spacing: -0.11px;	
+    line-height: 19px;
+    padding-left: 38px;
+}
+.updated-06-20-2019-1 {	
+    height: 16px;	
+    width: 370.36px;	
+    color: #67696D;	
+    font-family: "Work Sans";	
+    font-size: 14px;	
+    letter-spacing: -0.09px;	
+    line-height: 16px;
+    padding-left: 38px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 30px;
+}
+.slds-progress-bar {	
+    height: 20px;	
+    width: 100px;	
+    opacity: 0.4;	
+    border-radius: 10px;	
+    background-color: #D8D8DA;
+}
+.slds-progress-bar__value{	
+    height: 20px;	
+    width: 80px;	
+    border-radius: 10px 0 0 10px;	
+    background-color: #4CAEC7;
+}
+.completed {	
+    height: 21px;	
+    width: 102.88px;	
+    color: #292A2B;	
+    font-family: "Work Sans";	
+    font-size: 18px;	
+    font-weight: 500;	
+    line-height: 21px;
+}
+.items-complete {	
+    height: 14px;	
+    width: 102.88px;	
+    color: #636466;	
+    font-family: "Work Sans";	
+    font-size: 12px;	
+    line-height: 14px;
+}
+
+@font-face {
+    font-family: 'RockwellLight';
+    src: url(/resource/RockwellLight);
+}
+
+@font-face {
+    font-family: 'WorkSans';
+    src: url(/resource/WorkSans);
+}

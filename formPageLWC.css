@@ -1,0 +1,103 @@
+.basic-account-inform {	
+    height: 57px;	
+    width: 1221px;	
+    color: #00539B;	
+    font-family: "RockwellLight";	
+    font-size: 57px;	
+    font-weight: 300;	
+    line-height: 68px;
+    padding-left: 109px;
+}
+.form-group-description {	
+    height: 75px;	
+    width: 922px;	
+    color: #292A2B;
+    margin-top: 18px;
+    font-family: "Work Sans";	
+    font-size: 18px;	
+    line-height: 33px;
+    padding-left: 109px;
+}
+.forms {	
+    height: 33px;	
+    width: 71px;	
+    color: #00539B;	
+    font-family: "Work Sans";	
+    font-size: 15px;	
+    font-weight: 500;	
+    line-height: 33px;
+    padding-left: 109px;
+    margin-top: 30px;
+    margin-bottom: 48px;
+}
+.rectangle-copy-3 {	
+    height: 175px;	
+    width: 931px;	
+    border: 1px solid #D0D6DB;	
+    border-radius: 2px;	
+    background-color: #FFFFFF;	
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.15);
+    margin-left:100px;
+    margin-bottom:50px;
+    padding-top:32px;
+}
+.form-group-title-copy {	
+    height: 39.6px;	
+    width: 706.76px;	
+    color: #002B5C;	
+    font-family: "RockwellLight";	
+    font-size: 28px;	
+    font-weight: 300;	
+    line-height: 34px;
+    padding-left: 32px;
+}
+.updated-06-20-2019-1-copy {	
+    height: 18px;	
+    width: 503.37px;	
+    color: #67696D;	
+    font-family: "Work Sans";	
+    font-size: 15px;
+    margin-top: 24px;
+    letter-spacing: -0.1px;	
+    line-height: 18px;
+    padding-left: 32px;
+}
+.form-description{
+    height: 19px;	
+    width: 682.38px;	
+    color: #292A2B;
+    margin-top: 11px;
+    font-family: "Work Sans";	
+    font-size: 16px;	
+    letter-spacing: -0.11px;	
+    line-height: 19px;
+    padding-left: 32px;
+}
+.rectangle {	
+    height: 25px;	
+    width: 110px;	
+    border-radius: 23px;
+    margin-top: 40px;
+    margin-left: 25px;
+}
+.link-4 {	
+    height: 13px;	
+    width: 90px;	
+    font-family: "Work Sans";	
+    font-size: 11px;	
+    font-weight: 600;	
+    letter-spacing: 0.71px;	
+    line-height: 23px;	
+    text-align: center;
+    margin-left: 10px;
+}
+
+@font-face {
+    font-family: 'RockwellLight';
+    src: url(/resource/RockwellLight);
+}
+
+@font-face {
+    font-family: 'WorkSans';
+   src: url(/resource/WorkSans);
+}

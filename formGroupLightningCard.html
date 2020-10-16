@@ -1,0 +1,38 @@
+<template>    
+        <div>
+            <p class="heading">Form Groups</p>
+            <p class="headcont">Forms are grouped by similar content. Complete the forms to expedite your <br/> AmerisourceBergen account setup.</p>
+        </div>   
+        <div style="padding-top:64px;" class="grid-container">
+               
+            <template if:true={Forms}>                
+                <template for:each={Forms} for:item="Form">                    
+
+                    <div key={Form.id} class="rectangle-copy-3 slds-grid slds-gutters">
+                        <div key={Form.id} class="slds-col slds-size_3-of-4" style="margin-top:32px;border-right:1px solid;height:67%">                            
+                            <option key={Form.id}>
+                                <!--<a onclick={navigateToRecord} key={Form.id}>{Form.Name}</a>-->
+                               <lightning-button class="form-group-title" key={Form.Id} variant="base" label={Form.Name} 
+                                title={Form.Name} onclick={navigateToRecord} value={Form.Id}></lightning-button>
+                            </option>
+                            <option class="form-group-descripti" key={Form.id}> {Form.Description__c}</option>
+                            <option class="updated-06-20-2019-1" key={Form.id}> Updated<b> &nbsp; 
+                                <lightning-formatted-date-time value={Form.Last_Modified_Onboarding_Form__c} year="numeric" month="numeric" 
+                                    day="numeric" hour="2-digit" minute="2-digit" hour12="true"></lightning-formatted-date-time>
+                            </b> by <b>{Form.Line_Item_Last_Modified_User__c}</b>
+                            </option>
+                            <!-- <option key={Form.id}> {Form.Line_Item_Last_Modified_User__c}</option> -->
+                        </div>
+                        <div class="slds-col slds-size_1-of-4" style="margin-top:59px" key={Form.id}>
+                                <lightning-progress-bar variant="circular" value={Form.Complete__c} size="large" ></lightning-progress-bar><br/>
+                                <p class="items-complete">{Form.Completed_Onboarding_Forms__c}/{Form.Total_Onboarding_Forms__c}</p>
+                                <p class="items-complete">Items Complete</p>
+                        </div>
+                    </div>
+                </template>           
+            </template>
+            <template if:true={error}>
+                Error!
+            </template>
+        </div>
+</template>

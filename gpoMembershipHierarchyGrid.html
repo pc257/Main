@@ -1,0 +1,30 @@
+<template>
+    <div class="spinner">
+		<template if:true={isLoading}>
+			<lightning-spinner alternative-text="Loading" variant="brand" size="large"> </lightning-spinner>
+		</template>
+	</div>
+    <div class="slds-m-top_medium slds-m-bottom_x-large">
+        <h2 class="slds-text-heading_medium">
+            GPO Hierarchy Grid
+        </h2>
+        
+
+        <!-- Expanded rows -->
+        <div class="slds-p-around_medium lgc-bg">
+            <lightning-tree-grid
+                class="lgc-example-treegrid"
+                columns={gridColumns}
+                data={gridGranddata}
+                hide-checkbox-column="true"
+                expanded-rows={gridExpandedRows}
+                key-field="Name"
+                onrowaction={handleOnselect}
+                selected-rows={selectedRows}
+             ></lightning-tree-grid>
+        </div>
+        <template if:true={isopenModal} >
+        <c-gpo-box-popover ranger={ranger} gponame={gponame} onclosepopup={closemodal}></c-gpo-box-popover>
+        </template>
+    </div>
+</template>

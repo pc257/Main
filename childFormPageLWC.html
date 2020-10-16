@@ -1,0 +1,24 @@
+<template>
+    <template if:true={formData}>
+        <template if:true={Status.Complete}>
+            <div class="rectangle" style="background-color: #239143;">
+                <p class="link-4" style="color: #FFFFFF;">SUBMITTED</p>
+            </div>
+        </template>
+
+        <template if:true={Status.NotStarted}>
+            <div class="rectangle" style="border: 2px solid #666666;">
+                <p class="link-4" style="color: #666666;">NOT STARTED</p>
+            </div>
+        </template>
+
+        <template if:true={Status.InProgress}>
+            <div class="rectangle" style="background-color: #00539B;">
+                <p class="link-4" style="color: #FFFFFF;">IN PROGRESS</p>
+            </div>
+        </template>
+    </template>
+    <template if:false={formData}>
+        Child Error
+    </template>
+</template>

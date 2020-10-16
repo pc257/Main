@@ -1,0 +1,31 @@
+<template>
+    <div>
+        <div>
+            <p class="basic-account-inform">{FormGroupName}</p>
+            <p class="form-group-description">{FormGroupDescription}</p>
+        </div>
+        <template if:true={forms.data}>
+                
+            <template for:each={forms.data} for:item="form">
+                
+                    <div class="rectangle-copy-3 slds-grid slds-gutters" key={form.id}>
+                            <div class="slds-col slds-size_4-of-5" style="border-right:1px solid;height:80%">
+                                <a class="form-group-title-copy">{form.Name}</a>
+                                <p class="form-description">{form.Name}</p>
+                                <p class="updated-06-20-2019-1-copy">Updated&nbsp; 
+                                    <b><lightning-formatted-date-time value={form.Line_Item_Last_Modified_Date__c} 
+                                        year="numeric" month="numeric" day="numeric" hour="2-digit"
+                                        minute="2-digit" hour12="true"></lightning-formatted-date-time> </b> by&nbsp; 
+                                        <b>{form.Line_Item_Last_Modified_User__c}</b></p>
+                            </div>
+                            <div class="slds-col slds-size_1-of-5">
+                                    <c-child-form-page-l-w-c form-data={form}></c-child-form-page-l-w-c>
+                            </div>    
+                    </div>
+            </template>
+        </template>
+        <template if:false={forms.data}>
+            Error in group.
+        </template>
+    </div>    
+</template>

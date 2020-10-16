@@ -1,0 +1,29 @@
+<template>
+	<div class="slds-card slds-theme--default slds-m-left_large slds-m-right_large">
+		<div class="spinner">
+			<template if:true={isLoading}>
+				<lightning-spinner alternative-text="Loading" variant="brand" size="large"> </lightning-spinner>
+			</template>
+		</div>
+		<template if:false={isdetailpage}>
+			<div class="slds-box"> <img src={ABCLogo}> </div>
+			<div class="slds-p-around_medium lgc-bg">
+				<div class="slds-text-heading_medium slds-text-title_bold"> Welcome to the GPO Demographics Confirmation Site</div>
+				<div class="slds-size_1-of-3">
+					<lightning-input type="text" label={homeLabel} value={groupid} onchange={inputChange}></lightning-input>
+				</div>
+				<template if:true={isError}>
+					<div class="slds-m-vertical_medium">
+						<div class="slds-text-color_error slds-text-heading_medium slds-text-title_bold"> {showError}</div>
+					</div>
+				</template>
+				<div class="slds-m-top_medium">
+					<lightning-button variant="brand" label="Submit" title="Submit" onclick={navigateToDetail}></lightning-button>
+				</div>
+			</div>
+		</template>
+		<template if:true={isdetailpage}>
+			<c-gpo-access-dates-list-l-w-c groupid={membershipid} gpoaccessdates={gpoaccessdates} metadata={metaData} currentyear={currentyear}></c-gpo-access-dates-list-l-w-c>
+		</template>
+	</div>
+</template>
